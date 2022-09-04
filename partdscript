@@ -1,0 +1,12 @@
+#!/bin/bash
+while :
+do
+
+power=$(acpi -b|awk '{print $4}'|sed s/%.*//)
+#echo $power
+if [[ $power -lt 7 ]]; then
+	notify-send "Battery Is Critically Low, Go Get Your Charger!"
+	exec python3 battery.py
+fi
+sleep 30
+done
